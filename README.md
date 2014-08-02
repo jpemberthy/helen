@@ -1,6 +1,6 @@
 # Helen
 
-TODO: Write a gem description
+Helen will manipulate your Titan graphs through the RexPro protocol.
 
 ## Installation
 
