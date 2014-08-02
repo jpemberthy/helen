@@ -27,7 +27,7 @@ Or install it yourself as:
     saturn = helen.vertex(name: 'saturn')
     => #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'>
 
-    hercules = saturn.in(:father).in(:father)
+    hercules = saturn.inv_father.inv_father
     => #<Helen::Vertex _id: 6, name: 'hercules', age: '30', type: 'demigod'>
 
     hercules.father.father
@@ -46,6 +46,10 @@ Or install it yourself as:
     hercules.battled!(cerberus, time: 12, place: [39, 22])
 
     cerberus.destroy
+
+# TODO:
+
+1. Make it possible to alias edges, e.g 'inv_father' could be defined as 'son'.
 
 ## Contributing
 
