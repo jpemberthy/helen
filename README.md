@@ -18,11 +18,11 @@ Or install it yourself as:
 
 ## Usage
 
-# Connect to your graph.
+### Connect to your graph.
 
     helen = Helen::Client.new(host: 'localhost', port: 8184, graph: 'gods')
 
-# Basic traverse
+### Basic traverse
 
     saturn = helen.vertex(name: 'saturn')
     => #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'>
@@ -37,7 +37,7 @@ Or install it yourself as:
     => [ #<Helen::Vertex _id: 4, name: 'jupiter', age: '5000', type: 'god'>,
     =>   #<Helen::Vertex _id: 5, name: 'alcmene', age: '45', type: 'human'> ]
 
-# Basic manipulation
+### Basic manipulation
 
     cerberus = Helen::Vertex.create(name: 'cerberus', type:  'monster')
     => #<Helen::Vertex _id: 15, name: 'cerberus', type: 'monster'>
