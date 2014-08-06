@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jpemberthy@gmail.com"]
   spec.summary       = "Gem to manipulate Titan graphs through Rexter."
   spec.description   = "Gem to manipulate Titan graphs through Rexter."
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/jpemberthy/helen"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

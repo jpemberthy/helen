@@ -24,28 +24,32 @@ Or install it yourself as:
 
 ### Basic traverse
 
-    saturn = helen.vertex(name: 'saturn')
-    => #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'>
+```ruby
+saturn = helen.vertex(name: 'saturn')
+=> #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'>
 
-    hercules = saturn.inv_father.inv_father
-    => #<Helen::Vertex _id: 6, name: 'hercules', age: '30', type: 'demigod'>
+hercules = saturn.inv_father.inv_father
+=> #<Helen::Vertex _id: 6, name: 'hercules', age: '30', type: 'demigod'>
 
-    hercules.father.father
-    => #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'>
+hercules.father.father
+=> #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'>
 
-    hercules.father_and_mother
-    => [ #<Helen::Vertex _id: 4, name: 'jupiter', age: '5000', type: 'god'>,
-    =>   #<Helen::Vertex _id: 5, name: 'alcmene', age: '45', type: 'human'> ]
+hercules.father_and_mother
+=> [ #<Helen::Vertex _id: 4, name: 'jupiter', age: '5000', type: 'god'>,
+=>   #<Helen::Vertex _id: 5, name: 'alcmene', age: '45', type: 'human'> ]
+```
 
 ### Basic manipulation
 
-    cerberus = Helen::Vertex.create(name: 'cerberus', type:  'monster')
-    => #<Helen::Vertex _id: 15, name: 'cerberus', type: 'monster'>
+```ruby
+cerberus = Helen::Vertex.create(name: 'cerberus', type:  'monster')
+=> #<Helen::Vertex _id: 15, name: 'cerberus', type: 'monster'>
 
-    # Create an edge between two vertices
-    hercules.battled!(cerberus, time: 12, place: [39, 22])
+# Create an edge between two vertices
+hercules.battled!(cerberus, time: 12, place: [39, 22])
 
-    cerberus.destroy
+cerberus.destroy
+```
 
 # TODO:
 
