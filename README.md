@@ -20,17 +20,26 @@ Or install it yourself as:
 
 ### Connect to your graph.
 
-    helen = Helen::Client.new(host: 'localhost', port: 8184, graph: 'gods')
+```ruby
+helen = Helen::Client.new(host: 'localhost', port: 8184, graph: 'gods')
+```
 
 ### Basic traverse
 
+Considering Titan's graph of the gods:
+
+![gods](https://raw.githubusercontent.com/wiki/thinkaurelius/titan/images/graph-of-the-gods-2.png)
+
 ```ruby
+# Get saturn
 saturn = helen.vertex(name: 'saturn')
 => #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'>
 
+# Get saturn's grandchild
 hercules = saturn.inv_father.inv_father
 => #<Helen::Vertex _id: 6, name: 'hercules', age: '30', type: 'demigod'>
 
+# hercules grandfather
 hercules.father.father
 => #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'>
 
