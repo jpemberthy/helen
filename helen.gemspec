@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Helen::VERSION
   spec.authors       = ["Juan Pemberthy"]
   spec.email         = ["jpemberthy@gmail.com"]
-  spec.summary       = "Gem to manipulate Titan graphs through Rexter."
-  spec.description   = "Gem to manipulate Titan graphs through Rexter."
+  spec.summary       = "Gem to manipulate Titan graphs through Rexster."
+  spec.description   = "Gem to manipulate Titan graphs through Rexster."
   spec.homepage      = "https://github.com/jpemberthy/helen"
   spec.license       = "MIT"
 
