@@ -14,3 +14,8 @@ end
 def fixture_path(fixture)
   File.join(File.dirname(__FILE__), "fixtures", fixture)
 end
+
+def helen(opts = {})
+  opts = { host: 'localhost', port: 8184, graph: 'tinkergraph' }.merge(opts)
+  @_helen ||= Helen::Client.new opts
+end
