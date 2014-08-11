@@ -14,7 +14,8 @@ module Helen
       # g.V('name', 'peter')
       if identifier.is_a? Hash
         script = VERTEX_ITERATOR % "key, value"
-        execute script, key: identifier.keys.first, value: identifier.values.last
+        response = execute(script, key: identifier.keys.first, value: identifier.values.last)
+        Vertex.new_from_response response
       end
     end
 

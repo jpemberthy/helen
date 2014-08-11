@@ -14,10 +14,9 @@ describe Helen::Client do
     # Equivalent to g.V('name', 'hercules')
     it "finds a vertex with the given property" do
       peter = helen.vertex(name: 'peter')
-      pending "build vertex with the response"
-      expect(peter.id).to eq(6)
+      expect(peter._id).to eq('6')
       expect(peter.age).to eq(35)
-      expect(peger.name).to eq('peter')
+      expect(peter.name).to eq('peter')
     end
 
     # Equivalent to g.v(1), g.v(1,2,3)
