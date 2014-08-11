@@ -3,7 +3,7 @@ require "spec_helper"
 describe Helen::Vertex do
   describe "initialize" do
     it "initializes a new vertex with _id and the right attributes setters/getters" do
-      v = Helen::Vertex.new("_id" => 1, "_properties" => { "age" => 27, "name" => "hercules" })
+      v = Helen::Vertex.new(:_id => 1, age: 27, name: "hercules")
       expect(v._id).to eq(1)
       expect(v.age).to eq(27)
       expect(v.name).to eq("hercules")
@@ -17,6 +17,18 @@ describe Helen::Vertex do
   end
 
   describe "class_methods" do
+    describe ".new_from_response(response)" do
+      it "it initializes a new vertex from a rexspro response" do
+        results = [{"_id"=>"6", "_type"=>"vertex", "_properties"=>{"age"=>35, "name"=>"peter"}}]
+        response = double("response", results: results)
+        v = Helen::Vertex.new_from_response response
+        expect(v).to be_kind_of(Helen::Vertex)
+        expect(v._id).to eq("6")
+        expect(v.age).to eq(35)
+        expect(v.name).to eq("peter")
+      end
+    end
+
     describe ".create" do
       it "creates a new vertex in the graph with the given properties" do
         pending "WIP"
