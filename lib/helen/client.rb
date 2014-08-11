@@ -10,7 +10,6 @@ module Helen
     end
 
     def vertex(identifier)
-      puts identifier
       # g.V('name', 'peter')
       if identifier.is_a? Hash
         script = VERTEX_ITERATOR % "key, value"
