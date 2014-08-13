@@ -4,8 +4,11 @@ module Helen
 
     # results sample. {"_id"=>"6", "_type"=>"vertex", "_properties"=>{"age"=>35, "name"=>"peter"}}
     def self.new_from_response(response)
-      result = response.results.first
-      new(result["_properties"].merge(_id: result["_id"]))
+      results = response.results.is_a?(Hash) ? [ response.results ] : response.results
+
+      results.each_with_object([]) do |result, vertices|
+        vertices << new(result["_properties"].merge(_id: result["_id"]))
+      end
     end
 
     def initialize(attributes = {})

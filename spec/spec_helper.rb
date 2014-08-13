@@ -19,3 +19,7 @@ def helen(opts = {})
   opts = { host: 'localhost', port: 8184, graph: 'tinkergraph' }.merge(opts)
   @_helen ||= Helen::Client.new opts
 end
+
+def assert_vertex(vertex, attributes = {})
+  attributes.each { |k, v| expect(vertex.send(k)).to eq(v) }
+end

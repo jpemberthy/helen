@@ -14,13 +14,21 @@ describe Helen::Client do
     # Equivalent to g.V('name', 'hercules')
     it "finds a vertex with the given property" do
       peter = helen.vertex(name: 'peter')
-      expect(peter._id).to eq('6')
-      expect(peter.age).to eq(35)
-      expect(peter.name).to eq('peter')
+      assert_vertex(peter, { _id: '6', age: 35, name: 'peter' })
     end
 
     # Equivalent to g.v(1), g.v(1,2,3)
     it "finds a vertex by id(s)" do
+      peter = helen.vertex(6)
+      expect(peter).to eq(helen.vertex(name: 'peter'))
+
+      # marko = helen.vertex(1)
+      # assert_vertex(marko, { _id: 1, name: 'marko' })
+      #
+      # vadas = helen.vertex(2)
+      # assert_vertex(vadas, { _id: 2, name: 'vadas' })
+
+      # expect(helen.vertex([1, 2])).to eq([marko, vadas])
     end
   end
 

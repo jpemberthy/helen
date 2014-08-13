@@ -2,6 +2,7 @@
 module Helen
   class Client
     VERTEX_ITERATOR = "g.V(%s)".freeze
+    GET_VERTEX = "g.v(%s)".freeze
 
     attr_reader :host, :port, :graph, :client
 
@@ -14,7 +15,12 @@ module Helen
       if identifier.is_a? Hash
         script = VERTEX_ITERATOR % "key, value"
         response = execute(script, key: identifier.keys.first, value: identifier.values.last)
-        Vertex.new_from_response response
+        # TODO: double check if we should always return the first vertix here.
+        Vertex.new_from_response(response).first
+      elsif identifier.is_a? Array
+      else
+        response = execute(GET_VERTEX % identifier.to_i)
+        Vertex.new_from_response(response).first
       end
     end
 
