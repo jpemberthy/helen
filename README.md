@@ -31,17 +31,23 @@ Considering Titan's graph of the gods:
 ![gods](https://raw.githubusercontent.com/wiki/thinkaurelius/titan/images/graph-of-the-gods-2.png)
 
 ```ruby
-# Get saturn
+# Get a saturn
 saturn = helen.vertex(name: 'saturn')
 => #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'>
 
+# Get all vertices with a given property.
+monsters = helen.v(type: 'monster')
+=> [ #<Helen::Vertex _id: 15, name: 'nemean', type: 'monster'>,
+     #<Helen::Vertex _id: 16, name: 'hydra', type: 'monster'>,
+     #<Helen::Vertex _id: 17, name: 'cerberus', type: 'monster'> ]
+
 # Get saturn's grandchild
 hercules = saturn.inv_father.inv_father
-=> #<Helen::Vertex _id: 6, name: 'hercules', age: '30', type: 'demigod'>
+=> [ #<Helen::Vertex _id: 6, name: 'hercules', age: '30', type: 'demigod'> ]
 
 # hercules grandfather
 hercules.father.father
-=> #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'>
+=> [ #<Helen::Vertex _id: 1, name: 'saturn', age: '10000', type: 'titan'> ]
 
 hercules.father_and_mother
 => [ #<Helen::Vertex _id: 4, name: 'jupiter', age: '5000', type: 'god'>,

@@ -10,15 +10,24 @@ describe Helen::Client do
     end
   end
 
-  describe ".vertex" do
+  describe ".v" do
+    # Equivalent to g.v(1,2,3)
+    it "finds vertices by ids" do
+      vertices = helen.v([1, 2])
+      expect(vertices).to have(2).items
+      expect(vertices.map(&:name)).to match_array(['marko', 'vadas'])
+    end
+  end
+
+  describe '.vertix' do
     # Equivalent to g.V('name', 'hercules')
     it "finds a vertex with the given property" do
       peter = helen.vertex(name: 'peter')
       assert_vertex(peter, { _id: '6', age: 35, name: 'peter' })
     end
 
-    # Equivalent to g.v(1), g.v(1,2,3)
-    it "finds a vertex by id(s)" do
+    # equivalent to g.v(1)
+    it 'finds a vertex by id' do
       peter = helen.vertex(6)
       expect(peter).to eq(helen.vertex(name: 'peter'))
 
@@ -27,10 +36,6 @@ describe Helen::Client do
 
       vadas = helen.vertex(2)
       assert_vertex(vadas, { _id: '2', name: 'vadas' })
-
-      vertices = helen.vertex([1, 2])
-      expect(vertices).to have(2).items
-      expect(vertices.to_a).to match_array([marko, vadas])
     end
   end
 end
