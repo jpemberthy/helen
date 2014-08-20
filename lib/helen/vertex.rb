@@ -1,12 +1,14 @@
+require 'set'
+
 module Helen
   class Vertex
     attr_reader :_id
 
     # results sample. {"_id"=>"6", "_type"=>"vertex", "_properties"=>{"age"=>35, "name"=>"peter"}}
-    def self.new_from_response(response)
+    def self.from_response(response)
       results = response.results.is_a?(Hash) ? [ response.results ] : response.results
 
-      results.each_with_object([]) do |result, vertices|
+      results.each_with_object(Set.new) do |result, vertices|
         vertices << new(result["_properties"].merge(_id: result["_id"]))
       end
     end
@@ -22,6 +24,10 @@ module Helen
     end
 
     def self.create(attributes = {})
+    end
+
+    def ==(_vertex)
+      self._id && self._id == _vertex._id
     end
   end
 end

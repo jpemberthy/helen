@@ -22,14 +22,15 @@ describe Helen::Client do
       peter = helen.vertex(6)
       expect(peter).to eq(helen.vertex(name: 'peter'))
 
-      # marko = helen.vertex(1)
-      # assert_vertex(marko, { _id: 1, name: 'marko' })
-      #
-      # vadas = helen.vertex(2)
-      # assert_vertex(vadas, { _id: 2, name: 'vadas' })
+      marko = helen.vertex(1)
+      assert_vertex(marko, { _id: '1', name: 'marko' })
 
-      # expect(helen.vertex([1, 2])).to eq([marko, vadas])
+      vadas = helen.vertex(2)
+      assert_vertex(vadas, { _id: '2', name: 'vadas' })
+
+      vertices = helen.vertex([1, 2])
+      expect(vertices).to have(2).items
+      expect(vertices.to_a).to match_array([marko, vadas])
     end
   end
-
 end

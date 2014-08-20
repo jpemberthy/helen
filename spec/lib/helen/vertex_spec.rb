@@ -17,11 +17,13 @@ describe Helen::Vertex do
   end
 
   describe "class_methods" do
-    describe ".new_from_response(response)" do
-      it "it initializes a new vertex from a rexspro response" do
-        results = [{"_id"=>"6", "_type"=>"vertex", "_properties"=>{"age"=>35, "name"=>"peter"}}]
+    describe ".from_response(response)" do
+      it "it initializes a set of vertices from a rexspro response" do
+        results = [ { "_id"=>"6", "_type"=>"vertex", "_properties" => { "age"=>35, "name"=>"peter" } } ]
         response = double("response", results: results)
-        v = Helen::Vertex.new_from_response response
+        vertices = Helen::Vertex.from_response response
+        expect(vertices).to have(1).item
+        v = vertices.first
         expect(v).to be_kind_of(Helen::Vertex)
         expect(v._id).to eq("6")
         expect(v.age).to eq(35)
