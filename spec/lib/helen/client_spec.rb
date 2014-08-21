@@ -2,6 +2,19 @@ require "spec_helper"
 
 describe Helen::Client do
   describe "initialize" do
+    it "sets the global host, port and graph name if it's not supplied" do
+      Helen::Client.configure do |c|
+        c.host = 'localhost'
+        c.port = 8180
+        c.graph = 'tinkergraph'
+      end
+
+      client = Helen::Client.new
+      expect(client.host).to eq('localhost')
+      expect(client.port).to eq(8180)
+      expect(client.graph).to eq('tinkergraph')
+    end
+
     it "properly maps the host, port and graph name" do
       client = Helen::Client.new(host: 'localhost', port: 8182, graph: 'gods')
       expect(client.host).to eq('localhost')

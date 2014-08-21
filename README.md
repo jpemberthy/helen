@@ -22,6 +22,14 @@ Or install it yourself as:
 
 ```ruby
 helen = Helen::Client.new(host: 'localhost', port: 8184, graph: 'gods')
+
+# You can also define global configuration options. These values will be applied to clients
+# without specific settings.
+Helen::Client.configure do |c|
+  c.host = 'localhost'
+  c.port = 8184
+  c.graph = 'gods'
+end
 ```
 
 ### Basic traverse

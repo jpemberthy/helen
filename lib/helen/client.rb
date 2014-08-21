@@ -1,3 +1,4 @@
+require "helen/configuration"
 
 module Helen
   class Client
@@ -6,8 +7,18 @@ module Helen
 
     attr_reader :host, :port, :graph, :client
 
-    def initialize(host:, port:, graph:)
-      @host, @port, @graph = host, port, graph
+    def self.config
+      Configuration.instance
+    end
+
+    def self.configure(&block)
+      block.call(config)
+    end
+
+    def initialize(host: nil, port: nil, graph: nil)
+      @host = host || global_config.host
+      @port = port || global_config.port
+      @graph = graph || global_config.graph
     end
 
     # TODO: check how to handle big collections.
@@ -39,6 +50,10 @@ module Helen
       else
         execute(GET_VERTEX % identifier.to_i)
       end
+    end
+
+    def global_config
+      self.class.config
     end
   end
 end
