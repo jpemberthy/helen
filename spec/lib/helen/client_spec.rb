@@ -3,16 +3,10 @@ require "spec_helper"
 describe Helen::Client do
   describe "initialize" do
     it "sets the global host, port and graph name if it's not supplied" do
-      Helen::Client.configure do |c|
-        c.host = 'localhost'
-        c.port = 8180
-        c.graph = 'tinkergraph'
-      end
-
       client = Helen::Client.new
       expect(client.host).to eq('localhost')
-      expect(client.port).to eq(8180)
-      expect(client.graph).to eq('tinkergraph')
+      expect(client.port).to eq(8184)
+      expect(client.graph).to eq('test')
     end
 
     it "properly maps the host, port and graph name" do
@@ -24,31 +18,39 @@ describe Helen::Client do
   end
 
   describe ".v" do
+    before(:each) do
+      Helen::Vertex.create(name: 'saturn', age: '10000', type: 'titan')
+      Helen::Vertex.create(name: 'jupiter', age: '5000', type: 'god')
+    end
+
     # Equivalent to g.v(1,2,3)
     it "finds vertices by ids" do
-      vertices = helen.v([1, 2])
+      saturn_id = helen.vertex(name: 'saturn')._id
+      jupiter_id = helen.vertex(name: 'jupiter')._id
+
+      vertices = helen.v([saturn_id, jupiter_id])
+
       expect(vertices).to have(2).items
-      expect(vertices.map(&:name)).to match_array(['marko', 'vadas'])
+      expect(vertices.map(&:name)).to match_array(['saturn', 'jupiter'])
     end
   end
 
   describe '.vertix' do
+    before(:each) do
+      Helen::Vertex.create(name: 'saturn', age: '10000', type: 'titan')
+    end
+
     # Equivalent to g.V('name', 'hercules')
     it "finds a vertex with the given property" do
-      peter = helen.vertex(name: 'peter')
-      assert_vertex(peter, { _id: '6', age: 35, name: 'peter' })
+      saturn = helen.vertex(name: 'saturn')
+      assert_vertex(saturn, { age: '10000', name: 'saturn' })
     end
 
     # equivalent to g.v(1)
     it 'finds a vertex by id' do
-      peter = helen.vertex(6)
-      expect(peter).to eq(helen.vertex(name: 'peter'))
-
-      marko = helen.vertex(1)
-      assert_vertex(marko, { _id: '1', name: 'marko' })
-
-      vadas = helen.vertex(2)
-      assert_vertex(vadas, { _id: '2', name: 'vadas' })
+      saturn_id = helen.vertex(name: 'saturn')._id
+      saturn = helen.vertex(saturn_id)
+      assert_vertex(saturn, { _id: saturn_id, name: 'saturn' })
     end
   end
 end

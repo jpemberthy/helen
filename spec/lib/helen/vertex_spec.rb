@@ -35,6 +35,7 @@ describe Helen::Vertex do
       it "creates a new vertex in the graph with the given properties" do
         vertex = Helen::Vertex.create(name: 'sun', type: 'location')
         sun = helen.vertex(name: 'sun')
+        sun.should be_persisted
         sun.name.should == 'sun'
         sun.type.should == 'location'
       end

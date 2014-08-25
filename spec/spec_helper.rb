@@ -20,11 +20,11 @@ RSpec.configure do |config|
     end
   end
 
-  # config.around(:each) do |example|
-  #   GraphFactory.new.load!
-  #   example.run
-  #   GraphFactory.new.teardown!
-  # end
+  config.around(:each) do |example|
+    # GraphFactory.new.load!
+    example.run
+    GraphFactory.new.teardown!
+  end
 end
 
 def helen(opts = {})
