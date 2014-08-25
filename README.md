@@ -78,6 +78,7 @@ cerberus.destroy
 
 1. Make it possible to alias edges, e.g 'inv_father' could be defined as 'son'.
 2. Fix driver bindings for g.addVertex.
+3. Helen::Vertex#create should modify the object with the updated _id if it's successful.
 
 ## Contributing
 
