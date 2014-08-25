@@ -33,10 +33,9 @@ describe Helen::Vertex do
 
     describe ".create" do
       it "creates a new vertex in the graph with the given properties" do
-        pending "WIP"
         vertex = Helen::Vertex.create(name: 'sun', type: 'location')
-        sun = helen.vertex('sun')
-        sun.name.should == name
+        sun = helen.vertex(name: 'sun')
+        sun.name.should == 'sun'
         sun.type.should == 'location'
       end
     end

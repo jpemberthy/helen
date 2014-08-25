@@ -77,6 +77,7 @@ cerberus.destroy
 # TODO:
 
 1. Make it possible to alias edges, e.g 'inv_father' could be defined as 'son'.
+2. Fix driver bindings for g.addVertex.
 
 ## Contributing
 

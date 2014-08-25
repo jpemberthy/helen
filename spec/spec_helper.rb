@@ -9,6 +9,15 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+
+  config.before(:suite) do
+    # default helen config.
+    Helen::Client.configure do |c|
+      c.host = 'localhost'
+      c.port = 8184
+      c.graph = 'test'
+    end
+  end
 end
 
 def fixture_path(fixture)
@@ -16,8 +25,8 @@ def fixture_path(fixture)
 end
 
 def helen(opts = {})
-  opts = { host: 'localhost', port: 8184, graph: 'tinkergraph' }.merge(opts)
-  @_helen ||= Helen::Client.new opts
+  opts = { host: 'localhost', port: 8184, graph: 'test' }.merge(opts)
+  @_helen ||= Helen::Client.new(opts)
 end
 
 def assert_vertex(vertex, attributes = {})

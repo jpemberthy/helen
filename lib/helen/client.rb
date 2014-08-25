@@ -31,14 +31,14 @@ module Helen
       v(identifier).first
     end
 
+    def execute(script, bindings={})
+      client.execute(script, graph_name: graph, bindings: bindings)
+    end
+
     private
 
     def client
       @client ||= Rexpro::Client.new(host: host, port: port)
-    end
-
-    def execute(script, bindings={})
-      client.execute(script, graph_name: graph, bindings: bindings)
     end
 
     def identifier_request(identifier)
