@@ -1,4 +1,5 @@
 require 'helen'
+require 'graph_factory'
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
@@ -10,18 +11,20 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
 
-  config.before(:suite) do
-    # default helen config.
+  # Have a default client always.
+  config.before(:each) do
     Helen::Client.configure do |c|
       c.host = 'localhost'
       c.port = 8184
       c.graph = 'test'
     end
   end
-end
 
-def fixture_path(fixture)
-  File.join(File.dirname(__FILE__), "fixtures", fixture)
+  # config.around(:each) do |example|
+  #   GraphFactory.new.load!
+  #   example.run
+  #   GraphFactory.new.teardown!
+  # end
 end
 
 def helen(opts = {})

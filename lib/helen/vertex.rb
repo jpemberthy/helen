@@ -4,6 +4,7 @@ require 'delegate'
 module Helen
   class Vertex < SimpleDelegator
     ADD_VERTEX = "g.addVertex([%s])".freeze
+    REMOVE_VERTEX = "g.removeVertex(g.v(%s))".freeze
     attr_reader :_id, :attributes
 
     # results sample. {"_id"=>"6", "_type"=>"vertex", "_properties"=>{"age"=>35, "name"=>"peter"}}
@@ -38,6 +39,10 @@ module Helen
 
     def save
       persisted? ? update : add_to_graph
+    end
+
+    def destroy
+      execute(REMOVE_VERTEX % "id", id: self._id)
     end
 
     def ==(_vertex)
